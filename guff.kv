@@ -1,0 +1,19 @@
+#:kivy 1.0.9
+
+#:import TILE_SIZE main.TILE_SIZE
+
+<Avatar>:
+    size: 50, 50
+    canvas:
+        Rectangle:
+            source: self.source
+            pos: self.pos
+            size: self.size
+
+<Tile>:
+    size: TILE_SIZE, TILE_SIZE
+    canvas:
+        Rectangle:
+            source: self.source
+            size: self.size
+            pos: self.pos
