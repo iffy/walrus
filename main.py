@@ -90,6 +90,9 @@ class Area(RelativeLayout):
         self.add_widget(tile)
         tile.pos = (r * tile.size[0], c * tile.size[1])
 
+    def addForeground(self, r, c, tile):
+        self.add_widget(tile)
+        tile.pos = (r * tile.size[0], c * tile.size[1])
 
     def placeThing(self, r, c, thing):
         if thing not in self.children:
@@ -140,7 +143,12 @@ class GuffGame(Widget):
 
         self.avatar = Avatar()
         self.area.placeThing(2, 2, self.avatar)
+        self.area.placeThing(5, 5, Tile(source='roses.png'))
 
+    def plantThing(self, source):
+        r = self.avatar.pos[0] / TILE_SIZE
+        c = self.avatar.pos[1] / TILE_SIZE
+        self.area.placeThing(r, c, Tile(source=source))
 
     def update(self, dt):
         x = 0
@@ -157,6 +165,16 @@ class GuffGame(Widget):
         if 'x' in keys:
             for tile in self.avatar.onTiles():
                 tile.opacity = 0.5
+        if 'b' in keys:
+            self.plantThing('roses.png')
+        if 't' in keys:
+            self.plantThing('tree.png')
+        if 'w' in keys:
+            for tile in self.avatar.onTiles():
+                tile.source = 'water1.jpg'
+        if 'd' in keys:
+            for tile in self.avatar.onTiles():
+                tile.source = 'dirt_64.png'
         if 'q' in keys:
             sys.exit(1)
         
